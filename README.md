@@ -19,6 +19,12 @@ More Details on [ASSIGNMENT.md](./ASSIGNMENT.md)
 
 ## Building and Running Development environment (DEV)
 
+* ### BUILD AND RUN - using makefile
+
+  ````commandline
+  make dev
+  ````
+
 * ### BUILD
   
   ````commandline  
@@ -38,6 +44,8 @@ More Details on [ASSIGNMENT.md](./ASSIGNMENT.md)
   ````
 
 * ### OPEN <http://localhost:8000/>
+  
+On open will be redirected to the Django Rest Framework API showing the food truck search endpoint.
 
 * ### SUPER USER & DJANGO ADMIN
   

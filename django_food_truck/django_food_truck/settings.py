@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     
     'django.contrib.gis', # 'ENGINE': 'django.contrib.gis.db.backends.postgis'
     
+    'rest_framework',
+    'rest_framework_gis',
+    
     'django_food_truck.users',
     'django_food_truck.finder',
 ]
@@ -112,6 +115,34 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Django REST framework
+# https://www.django-rest-framework.org/
+# https://www.django-rest-framework.org/api-guide/throttling/
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+    ), # FIXME: Test with authentication on production
+
+    'DEFAULT_PERMISSION_CLASSES': (
+        # 'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.DjangoModelPermissions',
+    ),
+
+    # 'DEFAULT_THROTTLE_CLASSES': (
+    #     'rest_framework.throttling.AnonRateThrottle',
+    #     'rest_framework.throttling.UserRateThrottle'
+    # ), # Throttle Classes are being set directly on Views.
+
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'anon': '4/day',
+    #     'user': '4/day'
+    # }
+    
+    # https://github.com/openwisp/django-rest-framework-gis
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework_gis.schema.GeoFeatureAutoSchema',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

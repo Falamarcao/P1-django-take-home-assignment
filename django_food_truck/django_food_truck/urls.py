@@ -15,8 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.views.generic import RedirectView
+
+from .routers import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    path('api/v1/', include(router.urls)),
+    
+    path('', RedirectView.as_view(url='http://localhost:8000/api/v1/food-truck/?dist=30&point=-122.39015723961076,37.72441324329633&limit=5', permanent=False), name='home'),
 ]
