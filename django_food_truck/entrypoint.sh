@@ -24,8 +24,8 @@ python manage.py flush --no-input
 python manage.py makemigrations
 python manage.py migrate --noinput
 
-# ADD DATA - fixtures
-# python manage.py loaddata food-truck-data.csv
+# LOAD THE FOOD TRUCK DATA 
+python manage.py foodtruck_from_csv data/food-truck-data.csv
 
 # RUN TESTS EVERYTIME
 # python manage.py test django_food_truck.finder &> test.log

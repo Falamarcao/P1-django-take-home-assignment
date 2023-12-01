@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'django.contrib.gis', # 'ENGINE': 'django.contrib.gis.db.backends.postgis'
+    
     'django_food_truck.users',
     'django_food_truck.finder',
 ]

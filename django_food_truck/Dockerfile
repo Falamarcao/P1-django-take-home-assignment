@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3.9.6-alpine
+FROM python:3.10.13-bookworm
 
 # set work directory
 WORKDIR /usr/src/django_food_truck
@@ -8,9 +8,14 @@ WORKDIR /usr/src/django_food_truck
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+RUN apt-get update && apt-get upgrade -y
+RUN apt install -y netcat-traditional
+
 # install psycopg2 dependencies
-RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev
+RUN apt-get install -y libpq-dev python3-dev
+
+# Install system dependencies for GeoDjango - https://docs.djangoproject.com/en/4.2/ref/contrib/gis/install/geolibs/
+RUN apt-get install -y binutils libproj-dev gdal-bin
 
 # install dependencies
 RUN pip install --upgrade pip

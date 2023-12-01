@@ -13,7 +13,7 @@ services:
     depends_on:
       - db
   db:
-    image: postgres:13.0-alpine
+    image: imresamu/postgis # this is a experimental image that supports ARM/AMD (only recommended for development)
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
