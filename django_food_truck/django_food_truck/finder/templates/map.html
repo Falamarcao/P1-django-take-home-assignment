@@ -1,0 +1,91 @@
+{% load leaflet_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>FoodTrucks Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% leaflet_js %}
+    {% leaflet_css %}
+    
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        /* Make the map container full-screen */
+        #map {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Remove the custom alert styles */
+        /* .alert {
+            padding: 15px;
+            background-color: #f44336;
+            color: white;
+            text-align: center;
+        } */
+    </style>
+</head>
+<body>
+
+    {% if not location_points %}
+        <!-- Bootstrap Modal -->
+        <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">NO RESULTS FOUND</h4>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <strong>Please check the URL parameters.</strong>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Bootstrap JS and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <!-- Add script to automatically show the modal on page load -->
+        <script>
+            $(document).ready(function(){
+                $('#myModal').modal('show');
+            });
+        </script>
+    {% endif %}
+
+    <div id="map"></div>
+
+    <script>
+        var map = L.map('map').setView([{{ center_point.latitude|default:"37.72441324329633" }}, {{ center_point.longitude|default:"-122.39015723961076" }}], {{ center_point.zoom_level|default:"4" }});
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        {% for point in location_points %}
+            L.marker([{{ point.latitude }}, {{ point.longitude }}]).addTo(map)
+                .bindPopup("<strong>{{ point.name }}</strong><br>{{ point.facility_type }}<br>{{ point.address }}");
+        {% endfor %}
+    </script>
+</body>
+</html>

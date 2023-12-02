@@ -18,12 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 
+from .finder import urls as finder_urls
+
 from .routers import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     
+    path('finder/', include(finder_urls)),
+    
     path('api/v1/', include(router.urls)),
     
-    path('', RedirectView.as_view(url='http://localhost:8000/api/v1/food-truck/?dist=30&point=-122.39015723961076,37.72441324329633&limit=5', permanent=False), name='home'),
+    path('', RedirectView.as_view(url='http://localhost:8000/finder/map?dist=300&point=-122.39015723961076,37.72441324329633&limit=5', permanent=False), name='home'),
 ]

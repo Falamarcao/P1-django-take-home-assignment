@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_gis',
     
+    'leaflet',
+    
     'django_food_truck.users',
     'django_food_truck.finder',
 ]
