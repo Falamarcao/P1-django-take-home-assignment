@@ -34,6 +34,6 @@ python manage.py foodtruck_from_csv data/food-truck-data.csv
 echo "Creating Super User..."
 python manage.py createsuperuser --noinput --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL
 
-history -c
+# history -c
 
 exec "$@"
